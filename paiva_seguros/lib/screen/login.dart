@@ -3,81 +3,122 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:paiva_seguros/screen/cadastro.dart';
 
-class LoginScreen 
-
-extends StatelessWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(   
-      body: Column(
-        children: [
-          Container(
-            height: 300,
-            width: double.infinity,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+      resizeToAvoidBottomInset: false,
+      backgroundColor: Colors.white,
+      body: Container(
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(    
+          child: Column(
+            children: [
+              Container(
+                height: 300,
+                width: double.infinity,
+                color: Colors.white,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
 
-              children: [
-                SizedBox(height: 150,),
-                const Image(
-                  image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/09/cropped-Logo-Paiva-Corretora-2-218x75.png'),
-                  width: 400,
-                  height: 150,
-                ),                
-              ],
-            ),
+                  children: [
+                    SizedBox(height: 150,),
+                    const Image(
+                      image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/09/cropped-Logo-Paiva-Corretora-2-218x75.png'),
+                      width: 400,
+                      height: 150,
+                    ),                
+                  ],
+                ),
+              ),
+              SizedBox(height: 50),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Observer(builder: (_) {
+                    return TextField(
+                      decoration: InputDecoration(
+                        isDense: true,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        labelText: 'CPF',
+                        hintText: '706.728.211-44',
+                        icon: Icon(Icons.person,color: Colors.red),
+                      ),
+                    );
+                  }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Observer(builder: (_) {
+                    return TextField(
+                      decoration: InputDecoration(
+                        isDense: true,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        labelText: 'senha',
+                        hintText: '********',
+                        icon: Icon(Icons.lock,color: Colors.red),
+                      ),
+                    );
+                  }),
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                width: 150,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text("Entrar"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red, // background
+                    onPrimary: Colors.white, // foreground
+                    shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(50)), 
+                    textStyle: TextStyle(fontSize: 18),     
+                    shadowColor: Colors.red,         
+                  ),            
+                ),  
+              ),
+              SizedBox(height: 10),
+              SizedBox(
+                width: 150,
+                height: 45,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (v) => CadastroScreen()));
+                  },
+                  child: Text("Cadastrar-se"),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.white, // background
+                    onPrimary: Colors.red, // foreground
+                    shape: RoundedRectangleBorder(borderRadius:BorderRadius.circular(50)), 
+                    textStyle: TextStyle(fontSize: 18),     
+                    shadowColor: Colors.red,         
+                  ),            
+                ),  
+              ),
+            ],
           ),
-          SizedBox(height: 50),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Observer(builder: (_) {
-                return TextField(
-                  decoration: InputDecoration(
-                    isDense: true,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    labelText: 'email',
-                    hintText: 'gustavomourago@gmail.com',
-                    icon: Icon(Icons.email_outlined,color: Colors.red),
-                  ),
-                );
-              }),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Observer(builder: (_) {
-                return TextField(
-                  decoration: InputDecoration(
-                    isDense: true,
-                    filled: true,
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.red, width: 2.0),
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    labelText: 'senha',
-                    hintText: '********',
-                    icon: Icon(Icons.lock,color: Colors.red),
-                  ),
-                );
-              }),
-          ),
-        ],
+        ),
       ),
     );
   }
