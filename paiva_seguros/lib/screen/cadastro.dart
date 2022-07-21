@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-var isEnabled = true;
+
 class CadastroScreen extends StatelessWidget {
   const CadastroScreen({ Key? key }) : super(key: key);
 
@@ -118,6 +118,28 @@ class CadastroScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
+                        labelText: 'telefone',
+                        hintText: '64993421057',
+                        icon: Icon(Icons.email_outlined,color: Colors.red),
+                      ),
+                    );
+                  }),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Observer(builder: (_) {
+                    return TextField(
+                      decoration: InputDecoration(
+                        isDense: true,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.red, width: 2.0),
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
                         labelText: 'senha',
                         hintText: '********',
                         icon: Icon(Icons.lock,color: Colors.red),
@@ -130,7 +152,7 @@ class CadastroScreen extends StatelessWidget {
                 width: 150,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: isEnabled ? () {} : null,
+                  onPressed: () {},
                   child: Text("Cadastrar"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red, // background
