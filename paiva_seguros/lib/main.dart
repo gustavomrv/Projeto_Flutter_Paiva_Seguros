@@ -3,16 +3,16 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:brasil_fields/brasil_fields.dart';
-
 import 'package:paiva_seguros/screen/login.dart';
 import 'package:paiva_seguros/screen/cadastro.dart';
+import 'package:paiva_seguros/store/cadastro_store.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //FirebaseApp f = await Firebase.initializeApp();
 
   
-  //inicializarSigleton();
+  inicializarSigleton();
 
   runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
@@ -21,6 +21,6 @@ Future<void> main() async {
   //FirebaseFirestore.instance.collection('teste').add({'teste': 'teste'});
 }
 
-//void inicializarSigleton() {
-//  GetIt.I.registerSingleton(CadastroPessoaStore());
-//}
+void inicializarSigleton() {
+ GetIt.I.registerSingleton(CadastroClienteStore());
+}

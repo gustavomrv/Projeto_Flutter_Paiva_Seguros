@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:paiva_seguros/store/cadastro_store.dart';
+//import 'package:get_it/get_it_impl.dart';
 
 class CadastroScreen extends StatelessWidget {
-  const CadastroScreen({ Key? key }) : super(key: key);
-
+  CadastroScreen({ Key? key }) : super(key: key);
+  var store = GetIt.I<CadastroClienteStore>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(   
@@ -15,6 +17,7 @@ class CadastroScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Container(
         width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(    
           child: Column(
             children: [
@@ -41,6 +44,10 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store.controllerNome,
+                      onChanged: (value) {
+                        store.setNome(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -54,6 +61,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'Nome Completo',
                         hintText: 'Gustavo Moura Barros',
+                        errorText: store.isValidName,
                         icon: Icon(Icons.person,color: Colors.red),
                       ),
                     );
@@ -63,6 +71,10 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store.controllerCpf,
+                      onChanged: (value) {
+                        store.setCpf(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -76,6 +88,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'CPF',
                         hintText: '706.728.211-44',
+                        errorText: store.isValidCpf,
                         icon: Icon(Icons.note_alt,color: Colors.red),
                       ),
                     );
@@ -85,6 +98,10 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store.controllerEmail,
+                      onChanged: (value) {
+                        store.setEmail(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -98,6 +115,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'Email',
                         hintText: 'gustavomourago@gmail.com',
+                        errorText: store.isValidEmail,
                         icon: Icon(Icons.email_outlined,color: Colors.red),
                       ),
                     );
@@ -107,6 +125,10 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store.controllerTelefone,
+                      onChanged: (value) {
+                        store.setTelefone(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -120,6 +142,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'Telefone',
                         hintText: '64993421057',
+                        errorText: store.isValidTelefone,
                         icon: Icon(Icons.send_to_mobile_outlined,color: Colors.red),
                       ),
                     );
@@ -129,6 +152,10 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store.controllerSenha,
+                      onChanged: (value) {
+                        store.setSenha(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -142,6 +169,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'Senha',
                         hintText: '********',
+                        errorText: store.isValidSenha,
                         icon: Icon(Icons.lock,color: Colors.red),
                       ),
                     );
@@ -152,7 +180,7 @@ class CadastroScreen extends StatelessWidget {
                 width: 150,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: store.save(),
                   child: Text("Cadastrar"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red, // background
@@ -162,11 +190,14 @@ class CadastroScreen extends StatelessWidget {
                     shadowColor: Colors.red,         
                   ),            
                 ),  
-              ),              
+              ),  
+              SizedBox(height: 150, child: Scaffold(backgroundColor: Colors.white,)),   
+              SizedBox(height: 50, child: Scaffold(backgroundColor: Colors.red,)),            
             ],
           ),
         ),
       ),
+
     );
   }
 }
