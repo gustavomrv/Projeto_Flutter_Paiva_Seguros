@@ -74,14 +74,14 @@ class LoginScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        labelText: 'senha',
+                        labelText: 'Senha',
                         hintText: '********',
                         icon: Icon(Icons.lock,color: Colors.red),
                       ),
                     );
                   }),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               SizedBox(
                 width: 150,
                 height: 45,

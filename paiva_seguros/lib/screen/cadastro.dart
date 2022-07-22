@@ -19,7 +19,7 @@ class CadastroScreen extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 200,
+                height: 140,
                 width: double.infinity,
                 color: Colors.white,
                 child: Column(
@@ -27,11 +27,11 @@ class CadastroScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
 
                   children: [
-                    SizedBox(height: 40,),
+                    SizedBox(height: 20),
                     const Image(
                       image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/09/cropped-Logo-Paiva-Corretora-2-218x75.png'),
                       width: 400,
-                      height: 160,
+                      height: 120,
                     ),                
                   ],
                 ),
@@ -96,7 +96,7 @@ class CadastroScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        labelText: 'email',
+                        labelText: 'Email',
                         hintText: 'gustavomourago@gmail.com',
                         icon: Icon(Icons.email_outlined,color: Colors.red),
                       ),
@@ -118,9 +118,9 @@ class CadastroScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        labelText: 'telefone',
+                        labelText: 'Telefone',
                         hintText: '64993421057',
-                        icon: Icon(Icons.email_outlined,color: Colors.red),
+                        icon: Icon(Icons.send_to_mobile_outlined,color: Colors.red),
                       ),
                     );
                   }),
@@ -140,14 +140,14 @@ class CadastroScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        labelText: 'senha',
+                        labelText: 'Senha',
                         hintText: '********',
                         icon: Icon(Icons.lock,color: Colors.red),
                       ),
                     );
                   }),
               ),
-              SizedBox(height: 10),
+              SizedBox(height: 20),
               SizedBox(
                 width: 150,
                 height: 45,
