@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 class Routes {
   static const String authService =
       "https://identitytoolkit.googleapis.com/v1/";

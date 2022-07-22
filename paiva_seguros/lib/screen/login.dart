@@ -42,9 +42,9 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
-                      controller: store_login.controllerCpf,
+                      controller: store_login.controllerEmail,
                       onChanged: (value) {
-                        store_login.setCpf(value);
+                        store_login.setEmail(value);
                       },
                       decoration: InputDecoration(
                         isDense: true,
@@ -57,10 +57,10 @@ class LoginScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.red, width: 2.0),
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        labelText: 'CPF',
-                        hintText: '706.728.211-44',
-                        errorText: store_login.isValidCpf,
-                        icon: Icon(Icons.note_alt,color: Colors.red),
+                        labelText: 'Email',
+                        hintText: 'gustavomourago@gmail.com',
+                        errorText: store_login.isValidEmail,
+                        icon: Icon(Icons.email_outlined,color: Colors.red),
                       ),
                     );
                   }),

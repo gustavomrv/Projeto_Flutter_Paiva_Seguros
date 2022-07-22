@@ -4,23 +4,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:paiva_seguros/model/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+
+import '../service/sign_in_service.dart';
 part 'login_store.g.dart';
 
 class LoginClienteStore = _LoginClienteStoreBase with _$LoginClienteStore;
 
 abstract class _LoginClienteStoreBase with Store {
-  TextEditingController controllerCpf = TextEditingController();
+  TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerSenha = TextEditingController();
  
   @observable
-  String? cpf;
+  String? email;
   @observable
   String? senha;
 
   @action
-  void setCpf(String? w) {
-    if (w == null) controllerCpf.text = "";
-    cpf = w;
+  void setEmail(String? w) {
+    if (w == null) controllerEmail.text = "";
+    email = w;
   }
   @action
   void setSenha(String? z) {
@@ -29,15 +31,13 @@ abstract class _LoginClienteStoreBase with Store {
   }
 
   @computed
-  String? get isValidCpf {
-    if (cpf == null)
+  String? get isValidEmail {
+    if (email == null)
       return null;
-    else if (cpf!.isEmpty) {
+    else if (email!.isEmpty) {
       return "O campo não pode ser vazio ";
-    } else if (cpf!.length < 11) {
-      return "O campo CPF deve conter exatamente 11 dígitos";
-    } else if (cpf!.length > 11) {
-      return "O campo CPF deve conter exatamente 11 dígitos";
+    } else if (email!.length < 7) {
+      return "O campo CPF deve conter ao menos 7 dígitos";
     }
     return null;
   }
@@ -52,17 +52,19 @@ abstract class _LoginClienteStoreBase with Store {
     return null;
   }
 
-  Cliente getDados() {
-    return Cliente(cpf: cpf, senha: senha);
-  }
-
   Function()? login(context) {
-    if (cpf != null && isValidCpf == null && senha != null && isValidSenha == null)
-      return () {
-        //setCpf(null);
-        //setSenha(null);
-        
-      };
+    if (email != null && isValidEmail == null && senha != null && isValidSenha == null) 
+    return () {
+      // print(email);
+      // print(senha);
+      SignInService().signIn(
+        email,
+        senha,
+        context,
+      );    
+      setEmail(null);
+      setSenha(null);
+    };
     else
       return null;
   }
