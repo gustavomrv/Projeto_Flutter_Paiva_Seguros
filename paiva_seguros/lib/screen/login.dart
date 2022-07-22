@@ -97,7 +97,7 @@ class LoginScreen extends StatelessWidget {
                 width: 150,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: store_login.login(context),
                   child: Text("Entrar"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red, // background
@@ -127,6 +127,9 @@ class LoginScreen extends StatelessWidget {
                   ),            
                 ),  
               ),
+              SizedBox(height: 10),
+              SizedBox(height: 90, child: Scaffold(backgroundColor: Colors.white,)),   
+              SizedBox(height: 50, child: Scaffold(backgroundColor: Colors.red,)),   
             ],
           ),
         ),

@@ -55,4 +55,15 @@ abstract class _LoginClienteStoreBase with Store {
   Cliente getDados() {
     return Cliente(cpf: cpf, senha: senha);
   }
+
+  Function()? login(context) {
+    if (cpf != null && isValidCpf == null && senha != null && isValidSenha == null)
+      return () {
+        //setCpf(null);
+        //setSenha(null);
+        
+      };
+    else
+      return null;
+  }
 }
