@@ -43,6 +43,7 @@ dependencies:
   brasil_fields: ^1.4.5
   firebase_auth: ^3.5.0
   firebase_storage: ^10.3.3
+  http: ^0.13.4
   
 
 dev_dependencies:

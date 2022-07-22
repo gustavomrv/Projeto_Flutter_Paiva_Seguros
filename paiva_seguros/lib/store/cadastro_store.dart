@@ -5,6 +5,7 @@ import 'package:paiva_seguros/model/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 import 'package:paiva_seguros/screen/login.dart';
+import 'package:paiva_seguros/service/sign_up_service.dart';
 part 'cadastro_store.g.dart';
 
 class CadastroClienteStore = _CadastroClienteStoreBase with _$CadastroClienteStore;
@@ -112,13 +113,14 @@ abstract class _CadastroClienteStoreBase with Store {
         email != null && isValidEmail == null && telefone != null && isValidTelefone == null
         && senha != null && isValidSenha == null)
       return () {
-        Cliente c = getDados();
+        Cliente c = getDados();        
         FirebaseFirestore.instance.collection("cliente").add(c.toMap());
         setNome(null);
         setCpf(null);
         setEmail(null);
         setTelefone(null);
         setSenha(null);
+
         Navigator.of(context)
           .push(MaterialPageRoute(builder: (v) => LoginScreen()));
         
@@ -128,6 +130,11 @@ abstract class _CadastroClienteStoreBase with Store {
   }
 
   Cliente getDados() {
+    SignUpService().signUp(
+      email,
+      senha,
+    );
+    //print(email);
     return Cliente(nome: nome, cpf: cpf, email: email, telefone: telefone, senha: senha);
   }
 }
