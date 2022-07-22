@@ -180,7 +180,7 @@ class CadastroScreen extends StatelessWidget {
                 width: 150,
                 height: 45,
                 child: ElevatedButton(
-                  onPressed: store.save(),
+                  onPressed: store.save(context),
                   child: Text("Cadastrar"),
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red, // background

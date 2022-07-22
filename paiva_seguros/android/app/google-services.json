@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769443658420",
+    "project_id": "paiva-seguros",
+    "storage_bucket": "paiva-seguros.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769443658420:android:333809119145a89599b5e1",
+        "android_client_info": {
+          "package_name": "com.example.paiva_seguros"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769443658420-5dva11e62ludh4618a3pt2i6o6m5o9o0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPR8Qa6e8_BCsvCPK5ApPqF7y1Ld80hGE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769443658420-5dva11e62ludh4618a3pt2i6o6m5o9o0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

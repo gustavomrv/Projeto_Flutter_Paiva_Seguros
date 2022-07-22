@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:paiva_seguros/screen/cadastro.dart';
+import 'package:paiva_seguros/store/login_store.dart';
 
 class LoginScreen extends StatelessWidget {
-  const LoginScreen({ Key? key }) : super(key: key);
-
+  LoginScreen({ Key? key }) : super(key: key);
+  var store_login = GetIt.I<LoginClienteStore>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(   
@@ -41,6 +42,10 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store_login.controllerCpf,
+                      onChanged: (value) {
+                        store_login.setCpf(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -54,7 +59,8 @@ class LoginScreen extends StatelessWidget {
                         ),
                         labelText: 'CPF',
                         hintText: '706.728.211-44',
-                        icon: Icon(Icons.person,color: Colors.red),
+                        errorText: store_login.isValidCpf,
+                        icon: Icon(Icons.note_alt,color: Colors.red),
                       ),
                     );
                   }),
@@ -63,6 +69,10 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      controller: store_login.controllerSenha,
+                      onChanged: (value) {
+                        store_login.setSenha(value);
+                      },
                       decoration: InputDecoration(
                         isDense: true,
                         filled: true,
@@ -76,6 +86,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         labelText: 'Senha',
                         hintText: '********',
+                        errorText: store_login.isValidSenha,
                         icon: Icon(Icons.lock,color: Colors.red),
                       ),
                     );

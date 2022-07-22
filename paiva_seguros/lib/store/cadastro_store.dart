@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:paiva_seguros/model/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:paiva_seguros/screen/login.dart';
 part 'cadastro_store.g.dart';
 
 class CadastroClienteStore = _CadastroClienteStoreBase with _$CadastroClienteStore;
@@ -106,7 +107,7 @@ abstract class _CadastroClienteStoreBase with Store {
     return null;
   }
 
-  Function()? save() {
+  Function()? save(context) {
     if (nome != null && isValidName == null && cpf != null && isValidCpf == null &&
         email != null && isValidEmail == null && telefone != null && isValidTelefone == null
         && senha != null && isValidSenha == null)
@@ -118,6 +119,9 @@ abstract class _CadastroClienteStoreBase with Store {
         setEmail(null);
         setTelefone(null);
         setSenha(null);
+        Navigator.of(context)
+          .push(MaterialPageRoute(builder: (v) => LoginScreen()));
+        
       };
     else
       return null;
