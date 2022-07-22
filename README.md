@@ -1,4 +1,3 @@
 # Projeto_Flutter_Paiva_Seguros
 
-A speedrun project,
-necessary time - two days
+A speedrun flutter project with register, login auth and chat interation 
