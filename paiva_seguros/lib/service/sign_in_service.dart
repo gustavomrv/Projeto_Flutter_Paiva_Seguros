@@ -28,8 +28,11 @@ class SignInService {
       Navigator.of(context)
       .push(MaterialPageRoute(builder: (v) => HomeAdmScreen()));
     } else {
-      Navigator.of(context)
-      .push(MaterialPageRoute(builder: (v) => HomeClienteScreen()));
+      Navigator.pushReplacementNamed(
+          context,
+          "/home_cliente_screen",
+          arguments: {"email": email}
+      );
     }
   }
 }

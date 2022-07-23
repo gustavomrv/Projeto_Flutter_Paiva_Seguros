@@ -9,6 +9,7 @@ import 'package:paiva_seguros/store/login_store.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({ Key? key }) : super(key: key);
   var store_login = GetIt.I<LoginClienteStore>();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(   

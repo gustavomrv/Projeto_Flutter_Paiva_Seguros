@@ -37,7 +37,7 @@ abstract class _LoginClienteStoreBase with Store {
     else if (email!.isEmpty) {
       return "O campo não pode ser vazio ";
     } else if (email!.length < 7) {
-      return "O campo CPF deve conter ao menos 7 dígitos";
+      return "O campo email deve conter ao menos 7 dígitos";
     }
     return null;
   }

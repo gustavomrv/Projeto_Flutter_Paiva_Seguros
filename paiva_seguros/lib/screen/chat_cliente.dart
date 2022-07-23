@@ -14,8 +14,12 @@ class ChatCliente extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+
+    dynamic data = ModalRoute.of(context)?.settings.arguments;
+    String email = data["email"];
+
     return Scaffold(   
-      appBar: AppBar(title: Text("Chat com Gustavo Moura"), backgroundColor: Colors.red,),
+      appBar: AppBar(title: Text("Conversa com Gustavo Moura"), backgroundColor: Colors.red,),
       drawer: MyDrawer(),
       //endDrawer: ChatCliente(),
       body: Container(
@@ -46,7 +50,7 @@ class ChatCliente extends StatelessWidget {
                         hintText: 'Digite sua mensagem',
                         errorText: store_chat.isValidTexto,
                         suffixIcon: IconButton(
-                          onPressed: store_chat.save(context),
+                          onPressed: store_chat.save(context, email),
                           icon: Icon(Icons.send,color: Colors.red),
                         ),
                       ),

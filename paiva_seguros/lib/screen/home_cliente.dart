@@ -6,9 +6,14 @@ import 'package:paiva_seguros/screen/chat_cliente.dart';
 import 'package:paiva_seguros/screen/my_drawer.dart';
 
 class HomeClienteScreen extends StatelessWidget {
+
   HomeClienteScreen({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+    dynamic data = ModalRoute.of(context)?.settings.arguments;
+    String email = data["email"];
+
     return Scaffold(   
       appBar: AppBar(title: Text("Olá Cliente"), backgroundColor: Colors.red,),
       drawer: MyDrawer(),
@@ -50,8 +55,11 @@ class HomeClienteScreen extends StatelessWidget {
                         height: 70,
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.of(context)
-                              .push(MaterialPageRoute(builder: (v) => ChatCliente()));
+                            Navigator.pushReplacementNamed(
+                              context,
+                              "/chat_cliente_screen",
+                              arguments: {"email": email}
+                            );
                           },
                           child: Icon(Icons.chat,color: Colors.white),
                           style: ElevatedButton.styleFrom(

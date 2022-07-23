@@ -35,19 +35,19 @@ abstract class _ChatClienteStoreBase with Store {
     return null;
   }
 
-  Function()? save(context) {
+  Function()? save(context, email) {
     if (texto != null && isValidTexto == null)
       return () {
-        Mensagem m = getDados();        
-        //FirebaseFirestore.instance.collection("mensagem").add(m.toMap());
+        Mensagem m = getDados(email);        
+        FirebaseFirestore.instance.collection("mensagem").add(m.toMap());
         setTexto(null);        
       };
     else
       return null;
   }
 
-  Mensagem getDados() {
-    return Mensagem(texto: texto, tempo: DateTime.now(), remetente: FirebaseAuth.instance.currentUser?.email, destinatario: "gustavomourago@gmail.com");
+  Mensagem getDados(email) {
+    return Mensagem(texto: texto, tempo: DateTime.now(), remetente: email, destinatario: "gustavomourago@gmail.com");
   }
 
   
