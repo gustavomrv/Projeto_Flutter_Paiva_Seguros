@@ -8,8 +8,10 @@ import 'package:paiva_seguros/screen/my_drawer.dart';
 import 'package:paiva_seguros/store/chat_cliente_store.dart';
 
 class ChatCliente extends StatelessWidget {
+
   ChatCliente({Key? key}) : super(key: key);
   var store_chat = GetIt.I<ChatClienteStore>();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(   

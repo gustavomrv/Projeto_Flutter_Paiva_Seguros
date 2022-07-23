@@ -1,6 +1,7 @@
 // ignore_for_file: curly_braces_in_flow_control_structures
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:paiva_seguros/model/cliente.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -38,7 +39,7 @@ abstract class _ChatClienteStoreBase with Store {
     if (texto != null && isValidTexto == null)
       return () {
         Mensagem m = getDados();        
-        FirebaseFirestore.instance.collection("mensagem").add(m.toMap());
+        //FirebaseFirestore.instance.collection("mensagem").add(m.toMap());
         setTexto(null);        
       };
     else
@@ -46,6 +47,10 @@ abstract class _ChatClienteStoreBase with Store {
   }
 
   Mensagem getDados() {
-    return Mensagem(texto: texto);
+    return Mensagem(texto: texto, tempo: DateTime.now(), remetente: FirebaseAuth.instance.currentUser?.email, destinatario: "gustavomourago@gmail.com");
   }
+
+  
+ 
+
 }

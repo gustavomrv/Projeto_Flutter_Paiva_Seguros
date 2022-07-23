@@ -8,6 +8,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:paiva_seguros/screen/login.dart';
 import 'package:paiva_seguros/screen/cadastro.dart';
 import 'package:paiva_seguros/store/cadastro_store.dart';
+import 'package:paiva_seguros/store/chat_cliente_store.dart';
 import 'package:paiva_seguros/store/login_store.dart';
 
 Future<void> main() async {
@@ -27,4 +28,5 @@ Future<void> main() async {
 void inicializarSigleton() {
   GetIt.I.registerSingleton(LoginClienteStore());
   GetIt.I.registerSingleton(CadastroClienteStore());
+  GetIt.I.registerSingleton(ChatClienteStore());
 }
