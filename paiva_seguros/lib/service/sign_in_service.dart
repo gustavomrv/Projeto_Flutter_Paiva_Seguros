@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:paiva_seguros/screen/home_cliente.dart';
+import 'package:paiva_seguros/screen/home_adm.dart';
 import 'package:paiva_seguros/service/routes.dart';
 
 class SignInService {
@@ -21,6 +22,9 @@ class SignInService {
     print(response.body);
     if (response.body.contains("INVALID_PASSWORD") || response.body.contains("EMAIL_NOT_FOUND")) {
       print('Email ou senha invalido');
+    } else if (response.body.contains("gustavomourago@gmail.com")) {
+      Navigator.of(context)
+      .push(MaterialPageRoute(builder: (v) => HomeAdmScreen()));
     } else {
       Navigator.of(context)
       .push(MaterialPageRoute(builder: (v) => HomeClienteScreen()));
