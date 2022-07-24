@@ -23,7 +23,7 @@ class SignInService {
     //print(email_user);
     //print(response.body);
     if (response.body.contains("INVALID_PASSWORD") || response.body.contains("EMAIL_NOT_FOUND")) {
-      //print('Email ou senha invalido');
+      print('Email ou senha invalido');
     } else if (response.body.contains("gustavomourago@gmail.com")) {
       Navigator.of(context)
       .push(MaterialPageRoute(builder: (v) => HomeAdmScreen()));
