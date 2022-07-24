@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:paiva_seguros/screen/chat_cliente.dart';
@@ -13,15 +14,16 @@ class HomeClienteScreen extends StatelessWidget {
 
     dynamic data = ModalRoute.of(context)?.settings.arguments;
     String email = data["email"];
-
-    return Scaffold(   
-      appBar: AppBar(title: Text("Olá Cliente"), backgroundColor: Colors.red,),
+    // String nome = data["nome"];
+    // print(nome);
+    return Scaffold(     
+      appBar: AppBar(title: Text('Bem vindo(a)'), backgroundColor: Colors.red,),    
       drawer: MyDrawer(),
       //endDrawer: ChatCliente(),
       body: Container(
         child: SingleChildScrollView(    
           child: Column(
-            children: [
+            children: [              
               Container(
                 height: 300,
                 width: double.infinity,
@@ -41,7 +43,7 @@ class HomeClienteScreen extends StatelessWidget {
               ),
               SizedBox(height: 210, child: Container(color: Colors.white,)),
               Container(
-                height: 300,
+                height: 120,
                 width: double.infinity,
                 color: Colors.white,
                 child: Padding(
@@ -74,6 +76,7 @@ class HomeClienteScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 50, child: Container(color: Colors.red,)),
             ],
           ),
         ),

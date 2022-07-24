@@ -1,9 +1,10 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, curly_braces_in_flow_control_structures
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, curly_braces_in_flow_control_structures, unnecessary_new
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:paiva_seguros/screen/home_cliente.dart';
 import 'package:query/query.dart';
 import 'package:paiva_seguros/screen/login.dart';
 import 'package:paiva_seguros/screen/my_drawer.dart';
@@ -28,24 +29,35 @@ class ChatCliente extends StatelessWidget {
     var nome_map = FirebaseFirestore.instance.collection("cliente").where('email', isEqualTo: email);
     String nome = '';
 
-    StreamBuilder<QuerySnapshot>(
-      stream: nome_map.snapshots(),
-      builder: (context, snap) {
-        if (snap.hasData) {
-          List<DocumentSnapshot> documents = snap.data!.docs;
-          documents.map(
-            (e) => nome = e['nome'],
-          ).toList();
-        }
-        return Column();
-      }
-    );
+    // StreamBuilder<QuerySnapshot>(
+    //   stream: nome_map.snapshots(),
+    //   builder: (context, snap) {
+    //     if (snap.hasData) {
+    //       List<DocumentSnapshot> documents = snap.data!.docs;
+    //       documents.map(
+    //         (e) => nome = e['nome'],
+    //       ).toList();
+    //     }
+    //     return Column();
+    //   }
+    // );
 
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
     return Scaffold(   
-      appBar: AppBar(title: Text("Conversa com Gustavo Moura"), backgroundColor: Colors.red,),
-      drawer: MyDrawer(),
+      appBar: AppBar(
+        title: Text("Conversa com Gustavo Moura"), 
+        backgroundColor: Colors.red,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.white),
+          onPressed: () => Navigator.pushReplacementNamed(
+            context,
+            "/home_cliente_screen",
+            arguments: {"email": email}
+          )
+        ),  
+      ),
+      
       resizeToAvoidBottomInset: false,      
       //endDrawer: ChatCliente(),
       body: Container(
@@ -55,17 +67,17 @@ class ChatCliente extends StatelessWidget {
         child: Column(
           children: [
             StreamBuilder<QuerySnapshot>(
-      stream: nome_map.snapshots(),
-      builder: (context, snap) {
-        if (snap.hasData) {
-          List<DocumentSnapshot> documents = snap.data!.docs;
-          documents.map(
-            (e) => nome = e['nome'],
-          ).toList();
-        }
-        return Column();
-      }
-    ),
+              stream: nome_map.snapshots(),
+              builder: (context, snap) {
+                if (snap.hasData) {
+                  List<DocumentSnapshot> documents = snap.data!.docs;
+                  documents.map(
+                    (e) => nome = e['nome'],
+                  ).toList();
+                }
+                return Column();
+              }
+            ),
             
             StreamBuilder<QuerySnapshot>(
               // stream: FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo').snapshots(),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:paiva_seguros/model/cliente.dart';
@@ -27,7 +28,9 @@ class SignInService {
     } else if (response.body.contains("gustavomourago@gmail.com")) {
       Navigator.of(context)
       .push(MaterialPageRoute(builder: (v) => HomeAdmScreen()));
-    } else {
+    } else { 
+      // dynamic nome = load(email);
+      // print('Função else $nome');
       Navigator.pushReplacementNamed(
           context,
           "/home_cliente_screen",
@@ -36,3 +39,22 @@ class SignInService {
     }
   }
 }
+
+// dynamic load(email) {
+//   var nome_map = FirebaseFirestore.instance.collection("cliente").where('email', isEqualTo: email);
+//   dynamic nome = '';
+//   StreamBuilder<QuerySnapshot>(
+//     stream: nome_map.snapshots(),
+//     builder: (context, snap) {
+//       if (snap.hasData) {
+//         List<DocumentSnapshot> documents = snap.data!.docs;
+//         documents.map(
+//           (e) => nome = e['nome'],
+//         ).toList();
+//       }
+//       print('Função load $nome');
+//       return nome;
+//     }
+//   );
+//   return nome;
+// }
