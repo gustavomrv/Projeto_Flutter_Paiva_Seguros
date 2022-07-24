@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:query/query.dart';
 import 'package:paiva_seguros/screen/login.dart';
 import 'package:paiva_seguros/screen/my_drawer.dart';
 import 'package:paiva_seguros/store/chat_cliente_store.dart';
@@ -12,24 +13,29 @@ class ChatCliente extends StatelessWidget {
 
   ChatCliente({Key? key}) : super(key: key);
   var store_chat = GetIt.I<ChatClienteStore>();
-  CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
+  //CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
   @override
   Widget build(BuildContext context) {
 
     dynamic email_map = ModalRoute.of(context)?.settings.arguments;
     String email = email_map["email"];
+    
+    final mensagens_cliente = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo');
+    final mensagens_corretor = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: "gustavomourago@gmail.com").where('destinatario', isEqualTo: email).orderBy('tempo');
+    final mensagens_juntas = mensagens_cliente.mensagens_corretor;
 
     return Scaffold(   
       appBar: AppBar(title: Text("Conversa com Gustavo Moura"), backgroundColor: Colors.red,),
       drawer: MyDrawer(),
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,      
       //endDrawer: ChatCliente(),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(   
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection("mensagem").snapshots(),
+          // stream: FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo').snapshots(),
+          stream: mensagens_cliente.snapshots(),
           builder: (context, snap) {
             if (snap.hasData) {
               List<DocumentSnapshot> documents = snap.data!.docs;
