@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:paiva_seguros/screen/chat_cliente.dart';
-import 'package:paiva_seguros/screen/my_drawer.dart';
+import 'package:paiva_seguros/screen/drawer_cliente.dart';
 
 class HomeClienteScreen extends StatelessWidget {
 
@@ -18,7 +18,7 @@ class HomeClienteScreen extends StatelessWidget {
     // print(nome);
     return Scaffold(     
       appBar: AppBar(title: Text('Bem vindo(a)'), backgroundColor: Colors.red,),    
-      drawer: MyDrawer(),
+      drawer: DrawerCliente(),
       //endDrawer: ChatCliente(),
       body: Container(
         child: SingleChildScrollView(    

@@ -12,73 +12,40 @@ import 'package:paiva_seguros/store/chat_cliente_store.dart';
 import 'package:backendless_sdk/backendless_sdk.dart';
 
 
-class ChatClienteScreen extends StatelessWidget {
+class ChatAdmScreen extends StatelessWidget {
   DateTime _tempo = DateTime.now();
-  ChatClienteScreen({Key? key}) : super(key: key);
+  ChatAdmScreen({Key? key}) : super(key: key);
   var store_chat = GetIt.I<ChatClienteStore>();
   //CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
   @override
   Widget build(BuildContext context) {
 
-    dynamic email_map = ModalRoute.of(context)?.settings.arguments;
-    String email = email_map["email"];
-    
-    //dynamic mensagens_cliente = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo');
-    //dynamic mensagens_corretor = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: "gustavomourago@gmail.com").where('destinatario', isEqualTo: email).orderBy('tempo');
-    
-    var nome_map = FirebaseFirestore.instance.collection("cliente").where('email', isEqualTo: email);
-    String nome = '';
-
-    // StreamBuilder<QuerySnapshot>(
-    //   stream: nome_map.snapshots(),
-    //   builder: (context, snap) {
-    //     if (snap.hasData) {
-    //       List<DocumentSnapshot> documents = snap.data!.docs;
-    //       documents.map(
-    //         (e) => nome = e['nome'],
-    //       ).toList();
-    //     }
-    //     return Column();
-    //   }
-    // );
+    dynamic dados_cliente = ModalRoute.of(context)?.settings.arguments;
+    String email = dados_cliente["email"];
+    String nome = dados_cliente["nome"];
 
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
     return Scaffold(   
       appBar: AppBar(
-        title: Text("Conversa com Gustavo Moura"), 
+        title: Text(nome), 
         backgroundColor: Colors.red,
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () => Navigator.pushReplacementNamed(
             context,
-            "/home_cliente_screen",
-            arguments: {"email": email}
+            "/contatos_adm_screen",
           )
         ),  
       ),
-      
       resizeToAvoidBottomInset: false,      
-      //endDrawer: ChatClienteScreen(),
+
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
         child: SingleChildScrollView(   
         child: Column(
-          children: [
-            StreamBuilder<QuerySnapshot>(
-              stream: nome_map.snapshots(),
-              builder: (context, snap) {
-                if (snap.hasData) {
-                  List<DocumentSnapshot> documents = snap.data!.docs;
-                  documents.map(
-                    (e) => nome = e['nome'],
-                  ).toList();
-                }
-                return Column();
-              }
-            ),
-            
+          children: [             
             StreamBuilder<QuerySnapshot>(
               // stream: FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo').snapshots(),
               stream: mensagens_juntas.snapshots(),
@@ -103,12 +70,7 @@ class ChatClienteScreen extends StatelessWidget {
                                           children: <Widget>[
                                             Expanded(
                                               child: Row(
-                                                children: <Widget>[
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
-                                                    maxRadius: 20,
-                                                  ),
-                                                  SizedBox(width: 10,),
+                                                children: <Widget>[                                                
                                                   Expanded(
                                                     child: Container(
                                                       color: Colors.transparent,
@@ -121,6 +83,11 @@ class ChatClienteScreen extends StatelessWidget {
                                                         ],
                                                       ),
                                                     ),
+                                                  ),
+                                                  SizedBox(width: 10,),
+                                                  CircleAvatar(
+                                                    backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
+                                                    maxRadius: 20,
                                                   ),
                                                 ],
                                               ),
@@ -144,7 +111,10 @@ class ChatClienteScreen extends StatelessWidget {
                                             Expanded(
                                               child: Row(
                                                 children: <Widget>[
-                                                  
+                                                  CircleAvatar(
+                                                    backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
+                                                    maxRadius: 20,
+                                                  ),
                                                   SizedBox(width: 10,),
                                                   Expanded(
                                                     child: Container(
@@ -159,10 +129,7 @@ class ChatClienteScreen extends StatelessWidget {
                                                       ),
                                                     ),
                                                   ),
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
-                                                    maxRadius: 20,
-                                                  ),
+                                                  
                                                 ],
                                               ),
                                             ),                                            
@@ -220,54 +187,11 @@ class ChatClienteScreen extends StatelessWidget {
                       color: Colors.red,
                     ),
                   );
-              },
-              
+              },              
             ),
           ],
         ),
       ),
-      
-      // body: Container(
-      //   child: SingleChildScrollView(    
-      //     child: Column(
-      //       children: [
-              
-      //         //SizedBox(height: 540,),
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Observer(builder: (_) {
-      //               return TextField(
-      //                 controller: store_chat.controllerTexto,
-      //                 onChanged: (value) {
-      //                   store_chat.setTexto(value);
-      //                 },
-      //                 decoration: InputDecoration(
-      //                   isDense: true,
-      //                   filled: true,
-      //                   enabledBorder: OutlineInputBorder(
-      //                     borderSide: BorderSide(color: Colors.red, width: 2.0),
-      //                     borderRadius: BorderRadius.circular(20.0),
-      //                   ),
-      //                   border: OutlineInputBorder(
-      //                     borderSide: BorderSide(color: Colors.red, width: 2.0),
-      //                     borderRadius: BorderRadius.circular(20.0),
-      //                   ),
-      //                   labelText: 'Mensagem',
-      //                   hintText: 'Digite sua mensagem',
-      //                   errorText: store_chat.isValidTexto,
-      //                   suffixIcon: IconButton(
-      //                     onPressed: store_chat.save(context, email),
-      //                     icon: Icon(Icons.send,color: Colors.red),
-      //                   ),
-      //                 ),
-      //               );
-      //             }),
-      //         ),
-      //         SizedBox(height: 50, child: Scaffold(backgroundColor: Colors.red,)), 
-      //       ],
-      //     ),
-      //   ),
-      // ),
       )
     );
   }
