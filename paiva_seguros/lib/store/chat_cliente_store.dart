@@ -50,7 +50,19 @@ abstract class _ChatClienteStoreBase with Store {
     return Mensagem(texto: texto, tempo: DateTime.now(), remetente: email, destinatario: "gustavomourago@gmail.com");
   }
 
-  
- 
+  Function()? save_adm(context, email) {
+    if (texto != null && isValidTexto == null)
+      return () {
+        Mensagem m = getDados_adm(email);        
+        FirebaseFirestore.instance.collection("mensagem").add(m.toMap());
+        setTexto(null);        
+      };
+    else
+      return null;
+  }
+
+  Mensagem getDados_adm(email) {
+    return Mensagem(texto: texto, tempo: DateTime.now(), remetente: "gustavomourago@gmail.com", destinatario: email);
+  } 
 
 }
