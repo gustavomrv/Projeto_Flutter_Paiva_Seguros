@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last, curly_braces_in_flow_control_structures, unnecessary_new
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:paiva_seguros/screen/home_cliente.dart';
@@ -12,8 +14,12 @@ import 'package:paiva_seguros/store/chat_cliente_store.dart';
 import 'package:backendless_sdk/backendless_sdk.dart';
 
 
+
 class ChatAdmScreen extends StatelessWidget {
   ChatAdmScreen({Key? key}) : super(key: key);
+
+  // ScrollController scrollController = new ScrollController();
+
   var store_chat = GetIt.I<ChatClienteStore>();
   //CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
   @override
@@ -39,8 +45,7 @@ class ChatAdmScreen extends StatelessWidget {
         ),  
       ),  
       bottomSheet: Padding(                
-        padding: const EdgeInsets.all(8.0),
-        
+        padding: const EdgeInsets.all(8.0),  
         child: Observer(builder: (_) {
             return TextField(
               scrollPadding: EdgeInsets.only(bottom:40),
@@ -70,125 +75,117 @@ class ChatAdmScreen extends StatelessWidget {
             );
           }),
       ),
-      body: StreamBuilder<QuerySnapshot>(             
-                  stream: mensagens_juntas.snapshots(),
-                  builder: (context, snap) {
-                    if (snap.hasData) {
-                      List<DocumentSnapshot> documents = snap.data!.docs;
-                      return Padding(
-                        padding: EdgeInsets.all(1),
-                        child:
-                          ListView(
-                            shrinkWrap: true,
-                            children:           
-                            documents.map(
-                              (e) => Column(
-                                children: [
-                                  if (e['remetente'] == email)
-                                      Card(
-                                      child: Column(
-                                        children: [
-                                          Container(      
-                                            padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                                            child: Row(
-                                              children: <Widget>[
-                                                Expanded(
-                                                  child: Row(
-                                                    children: <Widget>[                                                
-                                                      Expanded(
-                                                        child: Container(
-                                                          color: Colors.transparent,
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: <Widget>[
-                                                              Text(nome, maxLines: 1,style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 0, 110, 201)),),
-                                                              SizedBox(height: 3,),
-                                                              Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      SizedBox(width: 10,),
-                                                      CircleAvatar(
-                                                        backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
-                                                        maxRadius: 20,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),                                            
-                                                //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
-                                              ],
+      body: StreamBuilder<QuerySnapshot>(                     
+        stream: mensagens_juntas.snapshots(),
+        builder: (context, snap) {
+          if (snap.hasData) {            
+            List<DocumentSnapshot> documents = snap.data!.docs;
+            return Padding(
+              padding: EdgeInsets.all(1),
+              child:
+                ListView(
+                  reverse: true,
+                  shrinkWrap: true,
+                //controller: scrollController.animateTo(offset, duration: duration, curve: curve),
+                  children:           
+                  documents.map(
+                    (e) => Column(
+                      children: [
+                        if (e['remetente'] == email)
+                            Card(
+                            child: Column(
+                              children: [
+                                Container(      
+                                  padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Row(
+                                          children: <Widget>[                                                
+                                            Expanded(
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text(nome, maxLines: 1,style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 0, 110, 201)),),
+                                                    SizedBox(height: 3,),
+                                                    Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
+                                                  ],
+                                                ),
+                                              ),
                                             ),
-                                          ),        
-                                        ],
-                                      ),                                  
-                                      color: Color.fromARGB(255, 244, 250, 255),
-                                    ),
-                                  if (e['destinatario'] == email)
-                                    Card(
-                                      child: Column(
-                                        children: [
-                                          Container(      
-                                            padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
-                                            child: Row(
-                                              children: <Widget>[
-                                                Expanded(
-                                                  child: Row(
-                                                    children: <Widget>[
-                                                      CircleAvatar(
-                                                        backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
-                                                        maxRadius: 20,
-                                                      ),
-                                                      SizedBox(width: 10,),
-                                                      Expanded(
-                                                        child: Container(
-                                                          color: Colors.transparent,
-                                                          child: Column(
-                                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                                            children: <Widget>[
-                                                              Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 180, 12, 0)),),
-                                                              SizedBox(height: 3,),
-                                                              Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                      
-                                                    ],
-                                                  ),
-                                                ),                                            
-                                                //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
-                                              ],
+                                            SizedBox(width: 10,),
+                                            CircleAvatar(
+                                              backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
+                                              maxRadius: 20,
                                             ),
-                                          ),        
-                                        ],
-                                      ),                                  
-                                      color: Color.fromARGB(255, 255, 242, 242),
-                                    ),
-                                ],
-                              ),                  
-                            ).toList(),               
-                                                            
-                          ),                    
-                      );
-                    }
-                     else
-                      return Center(
-                        child: CircularProgressIndicator(
-                          color: Colors.red,
-                        ),
-                      );
-                  },              
-                ),
-              
-            
-      
-
-      
-      
-         
-      
-      
+                                          ],
+                                        ),
+                                      ),                                            
+                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
+                                    ],
+                                  ),
+                                ),        
+                              ],
+                            ),                                  
+                            color: Color.fromARGB(255, 244, 250, 255),
+                          ),
+                        if (e['destinatario'] == email)
+                          Card(
+                            child: Column(
+                              children: [
+                                Container(      
+                                  padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Row(
+                                          children: <Widget>[
+                                            CircleAvatar(
+                                              backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
+                                              maxRadius: 20,
+                                            ),
+                                            SizedBox(width: 10,),
+                                            Expanded(
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 180, 12, 0)),),
+                                                    SizedBox(height: 3,),
+                                                    Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            
+                                          ],
+                                        ),
+                                      ),                                            
+                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
+                                    ],
+                                  ),
+                                ),        
+                              ],
+                            ),                                  
+                            color: Color.fromARGB(255, 255, 242, 242),
+                          ),
+                      ],
+                    ),                  
+                  ).toList(),                                                             
+                ),                    
+              );
+          }
+            else
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.red,
+              ),
+            );
+          },              
+      ),      
     );
   }
 }

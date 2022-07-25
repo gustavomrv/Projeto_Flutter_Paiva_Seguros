@@ -30,8 +30,8 @@ abstract class _ChatClienteStoreBase with Store {
       return null;
     else if (texto!.isEmpty) {
       return "A mensagem não pode ser vazia";
-    } else if (texto!.length < 2)
-      return "A mensagem deve conter ao menos 2 caracteres";
+    } else if (texto!.length < 1)
+      return "A mensagem deve conter ao menos 1 caracteres";
     return null;
   }
 
