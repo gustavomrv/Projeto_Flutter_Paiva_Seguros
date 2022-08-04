@@ -8,10 +8,13 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:paiva_seguros/screen/chat_adm.dart';
 import 'package:paiva_seguros/screen/chat_cliente.dart';
 import 'package:paiva_seguros/screen/contatos_adm.dart';
+import 'package:paiva_seguros/screen/drawer_cliente.dart';
 import 'package:paiva_seguros/screen/home_adm.dart';
 import 'package:paiva_seguros/screen/home_cliente.dart';
 import 'package:paiva_seguros/screen/login.dart';
 import 'package:paiva_seguros/screen/cadastro.dart';
+import 'package:paiva_seguros/screen/seguro_empresarial.dart';
+import 'package:paiva_seguros/screen/seguro_residencial.dart';
 import 'package:paiva_seguros/store/cadastro_store.dart';
 import 'package:paiva_seguros/store/chat_cliente_store.dart';
 import 'package:paiva_seguros/store/login_store.dart';
@@ -28,6 +31,9 @@ Future<void> main() async {
     routes: {
       "/login_screen": (context) => LoginScreen(),
       "/home_cliente_screen": (context) => HomeClienteScreen(),
+      "/drawer_cliente": (context) => DrawerCliente(),
+      "/cliente_seguro_residencial_screen": (context) => SeguroResidencialScreen(),
+      "/cliente_seguro_empresarial_screen": (context) => SeguroEmpresarialScreen(),
       "/chat_cliente_screen": (context) => ChatClienteScreen(),
       "/home_adm_screen": (context) => HomeAdmScreen(),
       "/contatos_adm_screen": (context) => ContatosAdmScreen(),

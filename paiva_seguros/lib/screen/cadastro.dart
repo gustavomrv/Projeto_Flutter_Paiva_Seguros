@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
+import 'package:brasil_fields/brasil_fields.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:paiva_seguros/store/cadastro_store.dart';
@@ -91,6 +93,10 @@ class CadastroScreen extends StatelessWidget {
                         errorText: store.isValidCpf,
                         icon: Icon(Icons.note_alt,color: Colors.red),
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        CpfInputFormatter(),
+                      ],
                     );
                   }),
               ),
@@ -141,10 +147,14 @@ class CadastroScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         labelText: 'Telefone',
-                        hintText: '64993421057',
+                        hintText: '(64)99342-1057',
                         errorText: store.isValidTelefone,
-                        icon: Icon(Icons.send_to_mobile_outlined,color: Colors.red),
+                        icon: Icon(Icons.send_to_mobile_outlined,color: Colors.red),                        
                       ),
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        TelefoneInputFormatter(),
+                      ],
                     );
                   }),
               ),
@@ -152,6 +162,9 @@ class CadastroScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      obscureText: true,
                       controller: store.controllerSenha,
                       onChanged: (value) {
                         store.setSenha(value);
@@ -169,7 +182,7 @@ class CadastroScreen extends StatelessWidget {
                         ),
                         labelText: 'Senha',
                         hintText: '********',
-                        errorText: store.isValidSenha,
+                        errorText: store.isValidSenha,                        
                         icon: Icon(Icons.lock,color: Colors.red),
                       ),
                     );

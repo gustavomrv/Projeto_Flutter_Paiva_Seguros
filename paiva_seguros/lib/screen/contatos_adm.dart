@@ -8,7 +8,7 @@ class ContatosAdmScreen extends StatelessWidget {
   ContatosAdmScreen({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    var clientes = FirebaseFirestore.instance.collection("cliente");
+    var clientes = FirebaseFirestore.instance.collection("cliente").orderBy('nome');
     return Scaffold(   
       appBar: AppBar(
         title: Text("Seus contatos"), 

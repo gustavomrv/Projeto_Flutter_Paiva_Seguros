@@ -84,7 +84,7 @@ class ChatAdmScreen extends StatelessWidget {
               padding: EdgeInsets.all(1),
               child:
                 ListView(
-                  reverse: true,
+                  reverse: false,
                   shrinkWrap: true,
                 //controller: scrollController.animateTo(offset, duration: duration, curve: curve),
                   children:           
@@ -129,7 +129,7 @@ class ChatAdmScreen extends StatelessWidget {
                                 ),        
                               ],
                             ),                                  
-                            color: Color.fromARGB(255, 244, 250, 255),
+                            color: Color.fromARGB(255, 255, 255, 255),
                           ),
                         if (e['destinatario'] == email)
                           Card(
@@ -143,7 +143,7 @@ class ChatAdmScreen extends StatelessWidget {
                                         child: Row(
                                           children: <Widget>[
                                             CircleAvatar(
-                                              backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
+                                              backgroundImage: NetworkImage('https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'),
                                               maxRadius: 20,
                                             ),
                                             SizedBox(width: 10,),
@@ -153,7 +153,7 @@ class ChatAdmScreen extends StatelessWidget {
                                                 child: Column(
                                                   crossAxisAlignment: CrossAxisAlignment.start,
                                                   children: <Widget>[
-                                                    Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 180, 12, 0)),),
+                                                    Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 17, 0)),),
                                                     SizedBox(height: 3,),
                                                     Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
                                                   ],
@@ -170,7 +170,7 @@ class ChatAdmScreen extends StatelessWidget {
                                 ),        
                               ],
                             ),                                  
-                            color: Color.fromARGB(255, 255, 242, 242),
+                            color: Color.fromARGB(255, 253, 247, 247),
                           ),
                       ],
                     ),                  

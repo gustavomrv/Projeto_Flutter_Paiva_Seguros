@@ -11,7 +11,14 @@ class DrawerAdm extends StatelessWidget {
     return Drawer(
       child: ListView(children: [
         DrawerHeader(
-          child: Text(""),
+          child: Column(
+            children: [
+              CircleAvatar(                                                  
+                backgroundImage: NetworkImage('https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'),
+                maxRadius: 65,
+              ),
+            ],
+          ),
           decoration: BoxDecoration(color: Colors.red),
         ),
         ClipRRect(

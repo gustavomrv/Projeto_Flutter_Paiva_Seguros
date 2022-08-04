@@ -13,10 +13,8 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 
 
 class ChatClienteScreen extends StatelessWidget {
-  DateTime _tempo = DateTime.now();
   ChatClienteScreen({Key? key}) : super(key: key);
   var store_chat = GetIt.I<ChatClienteStore>();
-  //CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
   @override
   Widget build(BuildContext context) {
 
@@ -57,9 +55,37 @@ class ChatClienteScreen extends StatelessWidget {
           )
         ),  
       ),
-      
-      resizeToAvoidBottomInset: false,      
-      //endDrawer: ChatClienteScreen(),
+      bottomSheet: Padding(                
+        padding: const EdgeInsets.all(8.0),  
+        child: Observer(builder: (_) {
+            return TextField(
+              scrollPadding: EdgeInsets.only(bottom:40),
+              controller: store_chat.controllerTexto,
+              onChanged: (value) {
+                store_chat.setTexto(value);
+              },
+              decoration: InputDecoration(
+                isDense: true,
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 2.0),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red, width: 2.0),
+                  borderRadius: BorderRadius.circular(20.0),
+                ),
+                labelText: 'Mensagem',
+                hintText: 'Digite sua mensagem',
+                errorText: store_chat.isValidTexto,
+                suffixIcon: IconButton(
+                  onPressed: store_chat.save(context, email),
+                  icon: Icon(Icons.send,color: Colors.red),
+                ),
+              ),
+            );
+          }),
+      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
@@ -88,6 +114,7 @@ class ChatClienteScreen extends StatelessWidget {
                   return Column(
                     children: [
                       ListView(
+                        reverse: false,
                         shrinkWrap: true,
                         children:           
                         documents.map(
@@ -131,7 +158,7 @@ class ChatClienteScreen extends StatelessWidget {
                                       ),        
                                     ],
                                   ),                                  
-                                  color: Color.fromARGB(255, 244, 250, 255),
+                                  color: Color.fromARGB(255, 255, 255, 255),
                                 ),
                               if (e['destinatario'] == email)
                                 Card(
@@ -152,7 +179,7 @@ class ChatClienteScreen extends StatelessWidget {
                                                       child: Column(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                         children: <Widget>[
-                                                          Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 180, 12, 0)),),
+                                                          Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 17, 0)),),
                                                           SizedBox(height: 3,),
                                                           Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
                                                         ],
@@ -160,7 +187,7 @@ class ChatClienteScreen extends StatelessWidget {
                                                     ),
                                                   ),
                                                   CircleAvatar(
-                                                    backgroundImage: NetworkImage('https://preview.redd.it/4q0gyrkf00081.jpg?auto=webp&s=f4e3f2fdcefe33f88d87cc1839ccb59c27772ed7'),
+                                                    backgroundImage: NetworkImage('https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'),
                                                     maxRadius: 20,
                                                   ),
                                                 ],
@@ -172,45 +199,13 @@ class ChatClienteScreen extends StatelessWidget {
                                       ),        
                                     ],
                                   ),                                  
-                                  color: Color.fromARGB(255, 255, 242, 242),
+                                  color: Color.fromARGB(255, 253, 247, 247),
                                 ),
                             ],
                           ),                  
                         ).toList(),               
                                                        
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Observer(builder: (_) {
-                            return TextField(
-                              controller: store_chat.controllerTexto,
-                              onChanged: (value) {
-                                store_chat.setTexto(value);
-                              },
-                              decoration: InputDecoration(
-                                isDense: true,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.red, width: 2.0),
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                labelText: 'Mensagem',
-                                hintText: 'Digite sua mensagem',
-                                errorText: store_chat.isValidTexto,
-                                suffixIcon: IconButton(
-                                  onPressed: store_chat.save(context, email),
-                                  icon: Icon(Icons.send,color: Colors.red),
-                                ),
-                              ),
-                            );
-                          }),
-                      ),
-                      SizedBox(height: 200, child: Scaffold(backgroundColor: Colors.white,)), 
-                      SizedBox(height: 50, child: Scaffold(backgroundColor: Colors.red,)), 
                     ],
                   );
                 }
@@ -225,49 +220,8 @@ class ChatClienteScreen extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),     
       
-      // body: Container(
-      //   child: SingleChildScrollView(    
-      //     child: Column(
-      //       children: [
-              
-      //         //SizedBox(height: 540,),
-      //         Padding(
-      //           padding: const EdgeInsets.all(8.0),
-      //           child: Observer(builder: (_) {
-      //               return TextField(
-      //                 controller: store_chat.controllerTexto,
-      //                 onChanged: (value) {
-      //                   store_chat.setTexto(value);
-      //                 },
-      //                 decoration: InputDecoration(
-      //                   isDense: true,
-      //                   filled: true,
-      //                   enabledBorder: OutlineInputBorder(
-      //                     borderSide: BorderSide(color: Colors.red, width: 2.0),
-      //                     borderRadius: BorderRadius.circular(20.0),
-      //                   ),
-      //                   border: OutlineInputBorder(
-      //                     borderSide: BorderSide(color: Colors.red, width: 2.0),
-      //                     borderRadius: BorderRadius.circular(20.0),
-      //                   ),
-      //                   labelText: 'Mensagem',
-      //                   hintText: 'Digite sua mensagem',
-      //                   errorText: store_chat.isValidTexto,
-      //                   suffixIcon: IconButton(
-      //                     onPressed: store_chat.save(context, email),
-      //                     icon: Icon(Icons.send,color: Colors.red),
-      //                   ),
-      //                 ),
-      //               );
-      //             }),
-      //         ),
-      //         SizedBox(height: 50, child: Scaffold(backgroundColor: Colors.red,)), 
-      //       ],
-      //     ),
-      //   ),
-      // ),
       )
     );
   }

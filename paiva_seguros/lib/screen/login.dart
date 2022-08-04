@@ -70,6 +70,9 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Observer(builder: (_) {
                     return TextField(
+                      enableSuggestions: false,
+                      autocorrect: false,
+                      obscureText: true,
                       controller: store_login.controllerSenha,
                       onChanged: (value) {
                         store_login.setSenha(value);

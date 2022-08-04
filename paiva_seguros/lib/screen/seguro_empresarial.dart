@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:paiva_seguros/screen/chat_cliente.dart';
 import 'package:paiva_seguros/screen/drawer_cliente.dart';
 
-class HomeClienteScreen extends StatelessWidget {
+class SeguroEmpresarialScreen extends StatelessWidget {
 
-  HomeClienteScreen({ Key? key }) : super(key: key);
+  SeguroEmpresarialScreen({ Key? key }) : super(key: key);
   @override
   Widget build(BuildContext context) {
 
@@ -16,40 +16,67 @@ class HomeClienteScreen extends StatelessWidget {
     String email = data["email"];
 
     return Scaffold(     
-      appBar: AppBar(title: Text('Página Inicial'), backgroundColor: Colors.red,),    
+      appBar: AppBar(title: Text('Seguro Empresarial'), backgroundColor: Colors.red,),    
       drawer: DrawerCliente(),
       //endDrawer: ChatCliente(),
       body: Container(
           child: Column(
             children: [              
               Container(
-                height: 245,
+                height: 345,
                 width: double.infinity,
                 color: Colors.white,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     SizedBox(height: 5,),
-                    Text('Seguro Residencial', style: TextStyle(fontSize: 22, color: Colors.red)),
-                    SizedBox(height: 5,),
                     Image(
-                      image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/06/baner-blog-insurance-desenho-casa-familia-2.png'),
+                      image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/09/mDa3qo9ij9-150x150.jpg'),
                       width: double.infinity,
                       height: 170,
                     ),    
-                    SizedBox(height: 5,),                    
-                    SizedBox(
-                      width: 140,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Você foca no seu negócio e o seguro cuida da proteção da sua empresa!', style: TextStyle(fontSize: 18, color: Colors.red)),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Seja qual for o ramo de atuação ou tamanho da sua empresa, há coberturas sob medida para suas necessidades. Além da estrutura física, o seguro protege o equilíbrio fincanceiro em casos de sinistros, ações judiciais e possui assistências 24 horas que facilitam sua rotina.', style: TextStyle(fontSize: 14, color: Colors.black)),
+                    ),               
+                  ],
+                ),
+              ),            
+              Container(
+                height: 134,
+                width: double.infinity,
+                color: Colors.red,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [                    
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Coberturas', style: TextStyle(fontSize: 19, color: Colors.white)),
+                    ),    
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text('Incêndio, raio, explosão, quebra de vidros, fidelidade de empregados, perda de aluguel, contaminação e deterioração de mercadorias, danos elétricos, subtração de valores, lucros cessantes, danos morais, tumultos, despesas fixas, painéis, letreiros, vendavais.', style: TextStyle(fontSize: 14, color: Colors.white)),
+                    ),                                       
+                  ],
+                ),
+              ),  
+              SizedBox(height: 5,),        
+              SizedBox(
+                      width: 240,
                       height: 30,
                       child: ElevatedButton(
                         onPressed: () {       
                           Navigator.pushReplacementNamed(
-                            context,
-                            "/cliente_seguro_residencial_screen",
-                            arguments: {"email": email}
-                          );             
+                              context,
+                              "/chat_cliente_screen",
+                              arguments: {"email": email}
+                            );        
                         },
-                        child: Text("Saiba mais"),
+                        child: Text("Converse com o corretor"),
                         style: ElevatedButton.styleFrom(
                           primary: Colors.red, // background
                           onPrimary: Colors.white, // foreground
@@ -57,52 +84,8 @@ class HomeClienteScreen extends StatelessWidget {
                           shadowColor: Colors.red,         
                         ),            
                       ),  
-                    ),            
-                  ],
-                ),
-              ),
-              SizedBox(height: 10,),
-              Container(
-                height: 245,
-                width: double.infinity,
-                color: Colors.red,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(height: 5,),
-                    Text('Seguro Empresarial', style: TextStyle(fontSize: 22, color: Colors.white)),
-                    SizedBox(height: 5,),
-                    Image(
-                      image: NetworkImage('https://paivacorretora.com.br/wp-content/uploads/2020/09/WhatsApp-Image-2020-09-04-at-14.55.12.jpeg'),
-                      width: double.infinity,
-                      height: 170,
-                    ),    
-                    SizedBox(height: 5,),                    
-                    SizedBox(
-                      width: 140,
-                      height: 30,
-                      child: ElevatedButton(
-                        onPressed: () { 
-                          Navigator.pushReplacementNamed(
-                            context,
-                            "/cliente_seguro_empresarial_screen",
-                            arguments: {"email": email}
-                          );               
-                        },
-                        child: Text("Saiba mais"),
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.white, // background
-                          onPrimary: Colors.red, // foreground
-                          textStyle: TextStyle(fontSize: 18),     
-                          shadowColor: Colors.red,         
-                        ),            
-                      ),  
-                    ),            
-                  ],
-                ),
-              ),
-              SizedBox(height: 10, child: Container(color: Colors.red),),
-              SizedBox(height: 5, child: Container(color: Colors.white),),
+                    ),  
+              SizedBox(height: 5,),       
               Container(
                 height: 110,
                 width: double.infinity,

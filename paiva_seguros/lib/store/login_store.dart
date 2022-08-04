@@ -36,7 +36,14 @@ abstract class _LoginClienteStoreBase with Store {
       return null;
     else if (email!.isEmpty) {
       return "O campo não pode ser vazio ";
-    } else if (email!.length < 7) {
+    }
+    else if (!email!.contains("@")) {
+      return "Está faltando um @ no email";
+    } 
+    else if (!email!.contains(".")) {
+      return "Está faltando um . no email";
+    }   
+    else if (email!.length < 7) {
       return "O campo email deve conter ao menos 7 dígitos";
     }
     return null;
@@ -55,8 +62,6 @@ abstract class _LoginClienteStoreBase with Store {
   Function()? login(context) {
     if (email != null && isValidEmail == null && senha != null && isValidSenha == null) 
     return () {
-      // print(email);
-      // print(senha);
       SignInService().signIn(
         email,
         senha,

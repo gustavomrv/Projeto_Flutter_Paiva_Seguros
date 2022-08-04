@@ -70,10 +70,8 @@ abstract class _CadastroClienteStoreBase with Store {
       return null;
     else if (cpf!.isEmpty) {
       return "O campo não pode ser vazio ";
-    } else if (cpf!.length < 11) {
-      return "O campo CPF deve conter exatamente 11 dígitos";
-    } else if (cpf!.length > 11) {
-      return "O campo CPF deve conter exatamente 11 dígitos";
+    } else if (cpf!.length != 14) {
+      return "O CPF está incompleto";
     }
     return null;
   }
@@ -83,7 +81,14 @@ abstract class _CadastroClienteStoreBase with Store {
       return null;
     else if (email!.isEmpty) {
       return "O campo não pode ser vazio ";
-    } else if (email!.length < 7)
+    } 
+    else if (!email!.contains("@")) {
+      return "Está faltando um @ no email";
+    } 
+    else if (!email!.contains(".")) {
+      return "Está faltando um . no email";
+    }
+    else if (email!.length < 7)
       return "O campo email deve conter mais de 7 caracteres";
     return null;
   }
@@ -93,8 +98,8 @@ abstract class _CadastroClienteStoreBase with Store {
       return null;
     else if (telefone!.isEmpty) {
       return "O campo não pode ser vazio ";
-    } else if (telefone!.length < 10)
-      return "O campo telefone deve conter mais de 9 caracteres";
+    } else if (telefone!.length < 15)
+      return "Formato do número inválido ou incompleto";
     return null;
   }
   @computed
