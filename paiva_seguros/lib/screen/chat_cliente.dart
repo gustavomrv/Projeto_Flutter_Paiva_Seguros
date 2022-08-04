@@ -15,6 +15,16 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 class ChatClienteScreen extends StatelessWidget {
   ChatClienteScreen({Key? key}) : super(key: key);
 
+  final ScrollController _controller = ScrollController();
+
+  void _scrollDown() {
+    _controller.animateTo(
+      _controller.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
+
   var store_chat = GetIt.I<ChatClienteStore>();
   @override
   Widget build(BuildContext context) {
@@ -22,30 +32,20 @@ class ChatClienteScreen extends StatelessWidget {
     dynamic email_map = ModalRoute.of(context)?.settings.arguments;
     String email = email_map["email"];
     
-    //dynamic mensagens_cliente = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo');
-    //dynamic mensagens_corretor = FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: "gustavomourago@gmail.com").where('destinatario', isEqualTo: email).orderBy('tempo');
-    
     var nome_map = FirebaseFirestore.instance.collection("cliente").where('email', isEqualTo: email);
     String nome = '';
-
-    // StreamBuilder<QuerySnapshot>(
-    //   stream: nome_map.snapshots(),
-    //   builder: (context, snap) {
-    //     if (snap.hasData) {
-    //       List<DocumentSnapshot> documents = snap.data!.docs;
-    //       documents.map(
-    //         (e) => nome = e['nome'],
-    //       ).toList();
-    //     }
-    //     return Column();
-    //   }
-    // );
 
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
     return Scaffold(   
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
+      floatingActionButton: FloatingActionButton.small(
+        backgroundColor: Colors.white,
+        onPressed: _scrollDown,
+        child: Icon(Icons.arrow_downward, color: Colors.red,),
+      ),
       appBar: AppBar(
-        title: Text("Conversa com Gustavo Moura"), 
+        title: Text("Conversa com Gustavo"), 
         backgroundColor: Colors.red,
         leading: new IconButton(
           icon: new Icon(Icons.arrow_back, color: Colors.white),
@@ -96,7 +96,7 @@ class ChatClienteScreen extends StatelessWidget {
               padding: EdgeInsets.all(1),
               child: 
                 ListView(
-
+                  controller: _controller,
                   reverse: false,
                   shrinkWrap: true,
                   children:           

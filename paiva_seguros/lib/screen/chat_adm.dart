@@ -21,7 +21,11 @@ class ChatAdmScreen extends StatelessWidget {
   final ScrollController _controller = ScrollController();
 
   void _scrollDown() {
-  _controller.jumpTo(_controller.position.maxScrollExtent);
+    _controller.animateTo(
+      _controller.position.maxScrollExtent,
+      duration: Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
   }
 
   var store_chat = GetIt.I<ChatClienteStore>();
@@ -36,9 +40,11 @@ class ChatAdmScreen extends StatelessWidget {
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
     return Scaffold(   
+      floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
       floatingActionButton: FloatingActionButton.small(
-      onPressed: _scrollDown,
-      child: Icon(Icons.arrow_downward),
+        backgroundColor: Colors.white,
+        onPressed: _scrollDown,
+        child: Icon(Icons.arrow_downward, color: Colors.red,),
       ),
       appBar: AppBar(
         title: Text(nome), 
@@ -91,10 +97,9 @@ class ChatAdmScreen extends StatelessWidget {
               padding: EdgeInsets.all(1),
               child:
                 ListView(
-                  controller: _controller,
                   reverse: false,
                   shrinkWrap: true,
-                //controller: scrollController.animateTo(offset, duration: duration, curve: curve),
+                  controller: _controller,
                   children:           
                   documents.map(
                     (e) => Column(
