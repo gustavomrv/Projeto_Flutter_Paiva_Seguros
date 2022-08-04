@@ -53,8 +53,8 @@ class ChatClienteScreen extends StatelessWidget {
             "/home_cliente_screen",
             arguments: {"email": email}
           )
-        ),  
-      ),
+        ),          
+      ),  
       bottomSheet: Padding(                
         padding: const EdgeInsets.all(8.0),  
         child: Observer(builder: (_) {
@@ -86,143 +86,124 @@ class ChatClienteScreen extends StatelessWidget {
             );
           }),
       ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: SingleChildScrollView(   
-        child: Column(
-          children: [
-            StreamBuilder<QuerySnapshot>(
-              stream: nome_map.snapshots(),
-              builder: (context, snap) {
-                if (snap.hasData) {
-                  List<DocumentSnapshot> documents = snap.data!.docs;
+      body: StreamBuilder<QuerySnapshot>(
+        stream: mensagens_juntas.snapshots(),
+        builder: (context, snap) {
+          if (snap.hasData) {
+            List<DocumentSnapshot> documents = snap.data!.docs;
+            return Padding(
+              padding: EdgeInsets.all(1),
+              child: 
+                ListView(
+                  reverse: false,
+                  shrinkWrap: true,
+                  children:           
                   documents.map(
-                    (e) => nome = e['nome'],
-                  ).toList();
-                }
-                return Column();
-              }
-            ),
-            
-            StreamBuilder<QuerySnapshot>(
-              // stream: FirebaseFirestore.instance.collection("mensagem").where('remetente', isEqualTo: email).where('destinatario', isEqualTo: "gustavomourago@gmail.com").orderBy('tempo').snapshots(),
-              stream: mensagens_juntas.snapshots(),
-              builder: (context, snap) {
-                if (snap.hasData) {
-                  List<DocumentSnapshot> documents = snap.data!.docs;
-                  return Column(
-                    children: [
-                      ListView(
-                        reverse: false,
-                        shrinkWrap: true,
-                        children:           
-                        documents.map(
-                          (e) => Column(
-                            children: [
-                              if (e['remetente'] == email)
-                                  Card(
-                                  child: Column(
-                                    children: [
-                                      Container(      
-                                        padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                    (e) => Column(
+                      children: [
+                        if (e['remetente'] == email)
+                            Card(
+                            child: Column(
+                              children: [
+                                Container(      
+                                  padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
                                         child: Row(
                                           children: <Widget>[
+                                            CircleAvatar(
+                                              backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
+                                              maxRadius: 20,
+                                            ),
+                                            SizedBox(width: 10,),
                                             Expanded(
-                                              child: Row(
-                                                children: <Widget>[
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage('https://fwctecnologia.com/static/avatar-cliente-projeto-aplicativo-fwc-tecnologia-cuiaba.webp'),
-                                                    maxRadius: 20,
-                                                  ),
-                                                  SizedBox(width: 10,),
-                                                  Expanded(
-                                                    child: Container(
-                                                      color: Colors.transparent,
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: <Widget>[
-                                                          Text(nome, maxLines: 1,style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 0, 110, 201)),),
-                                                          SizedBox(height: 3,),
-                                                          Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('Você', maxLines: 1,style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 0, 110, 201)),),
+                                                    SizedBox(height: 3,),
+                                                    Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
+                                                  ],
+                                                ),
                                               ),
-                                            ),                                            
-                                            //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
+                                            ),
                                           ],
                                         ),
-                                      ),        
+                                      ),                                            
+                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
                                     ],
-                                  ),                                  
-                                  color: Color.fromARGB(255, 255, 255, 255),
-                                ),
-                              if (e['destinatario'] == email)
-                                Card(
-                                  child: Column(
-                                    children: [
-                                      Container(      
-                                        padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                                  ),
+                                ),        
+                              ],
+                            ),                                  
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        if (e['destinatario'] == email)
+                          Card(
+                            child: Column(
+                              children: [
+                                Container(      
+                                  padding: EdgeInsets.only(left: 10,right: 10,top: 10,bottom: 10),
+                                  child: Row(
+                                    children: <Widget>[
+                                      Expanded(
                                         child: Row(
                                           children: <Widget>[
+                                            
+                                            SizedBox(width: 10,),
                                             Expanded(
-                                              child: Row(
-                                                children: <Widget>[
+                                              child: Container(
+                                                color: Colors.transparent,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 17, 0)),),
+                                                    SizedBox(height: 3,),
+                                                    Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            CircleAvatar(
+                                              backgroundImage: NetworkImage('https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'),
+                                              maxRadius: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),                                            
+                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
+                                    ],
+                                  ),
+                                ),        
+                              ],
+                            ),                                  
+                            color: Color.fromARGB(255, 253, 247, 247),
+                          ),
+                      ],
+                    ),                  
+                  ).toList(),               
                                                   
-                                                  SizedBox(width: 10,),
-                                                  Expanded(
-                                                    child: Container(
-                                                      color: Colors.transparent,
-                                                      child: Column(
-                                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                                        children: <Widget>[
-                                                          Text('Gustavo Moura Barros',maxLines: 1, style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 255, 17, 0)),),
-                                                          SizedBox(height: 3,),
-                                                          Text(e['texto'],style: TextStyle(fontSize: 13,color: Colors.black,)),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  CircleAvatar(
-                                                    backgroundImage: NetworkImage('https://i.pinimg.com/originals/8b/16/7a/8b167af653c2399dd93b952a48740620.jpg'),
-                                                    maxRadius: 20,
-                                                  ),
-                                                ],
-                                              ),
-                                            ),                                            
-                                            //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
-                                          ],
-                                        ),
-                                      ),        
-                                    ],
-                                  ),                                  
-                                  color: Color.fromARGB(255, 253, 247, 247),
-                                ),
-                            ],
-                          ),                  
-                        ).toList(),               
-                                                       
-                      ),
-                    ],
-                  );
-                }
-                 else
-                  return Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.red,
-                    ),
-                  );
-              },
+                ),
               
-            ),
-          ],
-        ),
-      ),     
+            );
+          }
+            else
+            return Center(
+              child: CircularProgressIndicator(
+                color: Colors.red,
+              ),
+            );
+        },
+        
+      ),
+          
+        
+          
       
-      )
+
     );
   }
 }
