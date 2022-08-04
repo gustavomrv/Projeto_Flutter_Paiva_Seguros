@@ -40,7 +40,6 @@ Future<void> main() async {
       "/chat_adm_screen": (context) => ChatAdmScreen(),
     },    
   ));
-  //FirebaseFirestore.instance.collection('teste').add({'teste': 'teste'});
 }
 
 void inicializarSigleton() {

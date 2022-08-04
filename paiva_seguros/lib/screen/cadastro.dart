@@ -30,7 +30,6 @@ class CadastroScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
-
                   children: [
                     SizedBox(height: 20),
                     const Image(

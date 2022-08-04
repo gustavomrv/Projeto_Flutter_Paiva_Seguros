@@ -13,8 +13,6 @@ import 'package:paiva_seguros/screen/drawer_cliente.dart';
 import 'package:paiva_seguros/store/chat_cliente_store.dart';
 import 'package:backendless_sdk/backendless_sdk.dart';
 
-
-
 class ChatAdmScreen extends StatelessWidget {
   ChatAdmScreen({Key? key}) : super(key: key);
 
@@ -176,11 +174,10 @@ class ChatAdmScreen extends StatelessWidget {
                                             
                                           ],
                                         ),
-                                      ),                                            
-                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
+                                      ),
                                     ],
                                   ),
-                                ),        
+                                ),
                               ],
                             ),                                  
                             color: Color.fromARGB(255, 253, 247, 247),

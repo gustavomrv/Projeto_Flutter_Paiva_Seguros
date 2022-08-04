@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, sort_child_properties_last
+// ignore_for_file: prefer_const_constructors_in_immutables, prefer_const_constructors, sort_child_properties_last, curly_braces_in_flow_control_structures
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +87,6 @@ class ContatosAdmScreen extends StatelessWidget {
                                                 ],
                                               ),
                                             ),                                            
-                                            //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
                                           ],
                                         ),
                                       ),        

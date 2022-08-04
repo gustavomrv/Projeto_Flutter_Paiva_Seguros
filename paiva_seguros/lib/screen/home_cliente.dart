@@ -18,7 +18,6 @@ class HomeClienteScreen extends StatelessWidget {
     return Scaffold(     
       appBar: AppBar(title: Text('Página Inicial'), backgroundColor: Colors.red,),    
       drawer: DrawerCliente(),
-      //endDrawer: ChatCliente(),
       body: Container(
           child: Column(
             children: [              

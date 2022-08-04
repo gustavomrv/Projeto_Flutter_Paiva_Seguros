@@ -31,9 +31,6 @@ class ChatClienteScreen extends StatelessWidget {
     
     dynamic email_map = ModalRoute.of(context)?.settings.arguments;
     String email = email_map["email"];
-    
-    var nome_map = FirebaseFirestore.instance.collection("cliente").where('email', isEqualTo: email);
-    String nome = '';
 
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
@@ -176,7 +173,6 @@ class ChatClienteScreen extends StatelessWidget {
                                           ],
                                         ),
                                       ),                                            
-                                      //Text(('${_tempo.hour}:${_tempo.minute}'),style: TextStyle(fontSize: 10),),
                                     ],
                                   ),
                                 ),        
@@ -186,10 +182,8 @@ class ChatClienteScreen extends StatelessWidget {
                           ),
                       ],
                     ),                  
-                  ).toList(),               
-                                                  
-                ),
-              
+                  ).toList(),                                                           
+                ),             
             );
           }
             else
@@ -198,14 +192,8 @@ class ChatClienteScreen extends StatelessWidget {
                 color: Colors.red,
               ),
             );
-        },
-        
+        },      
       ),
-          
-        
-          
-      
-
     );
   }
 }

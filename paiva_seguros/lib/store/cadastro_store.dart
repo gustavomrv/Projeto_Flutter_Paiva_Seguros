@@ -139,7 +139,7 @@ abstract class _CadastroClienteStoreBase with Store {
       email,
       senha,
     );
-    //print(email);
+
     return Cliente(nome: nome, cpf: cpf, email: email, telefone: telefone, senha: senha);
   }
 }
