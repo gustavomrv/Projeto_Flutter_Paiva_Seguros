@@ -14,10 +14,11 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 
 class ChatClienteScreen extends StatelessWidget {
   ChatClienteScreen({Key? key}) : super(key: key);
+
   var store_chat = GetIt.I<ChatClienteStore>();
   @override
   Widget build(BuildContext context) {
-
+    
     dynamic email_map = ModalRoute.of(context)?.settings.arguments;
     String email = email_map["email"];
     
@@ -95,6 +96,7 @@ class ChatClienteScreen extends StatelessWidget {
               padding: EdgeInsets.all(1),
               child: 
                 ListView(
+
                   reverse: false,
                   shrinkWrap: true,
                   children:           

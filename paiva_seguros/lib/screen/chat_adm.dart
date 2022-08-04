@@ -18,10 +18,14 @@ import 'package:backendless_sdk/backendless_sdk.dart';
 class ChatAdmScreen extends StatelessWidget {
   ChatAdmScreen({Key? key}) : super(key: key);
 
-  // ScrollController scrollController = new ScrollController();
+  final ScrollController _controller = ScrollController();
+
+  void _scrollDown() {
+  _controller.jumpTo(_controller.position.maxScrollExtent);
+  }
 
   var store_chat = GetIt.I<ChatClienteStore>();
-  //CollectionReference mensagens = FirebaseFirestore.instance.collection('mensagem');
+  
   @override
   Widget build(BuildContext context) {
 
@@ -32,7 +36,10 @@ class ChatAdmScreen extends StatelessWidget {
     var mensagens_juntas = FirebaseFirestore.instance.collection("mensagem").orderBy('tempo');
     
     return Scaffold(   
-      
+      floatingActionButton: FloatingActionButton.small(
+      onPressed: _scrollDown,
+      child: Icon(Icons.arrow_downward),
+      ),
       appBar: AppBar(
         title: Text(nome), 
         backgroundColor: Colors.red,
@@ -84,6 +91,7 @@ class ChatAdmScreen extends StatelessWidget {
               padding: EdgeInsets.all(1),
               child:
                 ListView(
+                  controller: _controller,
                   reverse: false,
                   shrinkWrap: true,
                 //controller: scrollController.animateTo(offset, duration: duration, curve: curve),
